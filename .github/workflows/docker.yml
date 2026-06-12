@@ -25,14 +25,12 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR }}
 
       - name: Construir imagen
         run: |
-          docker build \
-          -t ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }} \
-          -t ghcr.io/${{ github.repository }}:latest \
-          .
+          docker build -t ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }} \
+                       -t ghcr.io/${{ github.repository }}:latest .
 
       - name: Publicar imagen
         run: |
